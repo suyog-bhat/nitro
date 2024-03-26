@@ -51,23 +51,4 @@ contract Bridge is AbsBridge, IEthBridge {
     function _baseFeeToReport() internal view override returns (uint256) {
         return block.basefee;
     }
-
-    uint256 private pps;
-    address private sequencer;
-
-    function setPPS(uint256 _pps) external onlySequencer {
-        pps = _pps;
-    }
-
-    function getPPS() external view returns (uint256) {
-        return pps;
-    }
-
-    function setSequencer(address _sequencer) external onlyOwner {
-        sequencer = _sequencer;
-    }
-    modifier onlySequencer() {
-        require(msg.sender == sequencer, "Unauthorised sequencer");
-        _;
-    }
 }
