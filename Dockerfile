@@ -29,9 +29,9 @@ RUN apt-get update && \
     apt-get install -y git python3 make g++ curl
 RUN curl -L https://foundry.paradigm.xyz | bash && . ~/.bashrc && ~/.foundry/bin/foundryup
 WORKDIR /workspace
-COPY contracts/package.json contracts/yarn.lock contracts/
-RUN cd contracts && yarn install
-COPY contracts contracts/
+COPY nitro-contracts/package.json contracts/yarn.lock contracts/
+RUN cd nitro-contracts && yarn install
+COPY nitro-contracts contracts/
 COPY Makefile .
 RUN . ~/.bashrc && NITRO_BUILD_IGNORE_TIMESTAMPS=1 make build-solidity
 
@@ -71,8 +71,8 @@ COPY ./statetransfer ./statetransfer
 COPY ./util ./util
 COPY ./wavmio ./wavmio
 COPY ./zeroheavy ./zeroheavy
-COPY ./contracts/src/precompiles/ ./contracts/src/precompiles/
-COPY ./contracts/package.json ./contracts/yarn.lock ./contracts/
+COPY nitro-contracts/src/precompiles/ ./contracts/src/precompiles/
+COPY nitro-contracts/package.json ./contracts/yarn.lock ./contracts/
 COPY ./solgen/gen.go ./solgen/
 COPY ./fastcache ./fastcache
 COPY ./go-ethereum ./go-ethereum
@@ -139,7 +139,7 @@ COPY --from=wasm-libs-builder /workspace/.make/ .make/
 COPY ./Makefile ./
 COPY ./arbitrator ./arbitrator
 COPY ./solgen ./solgen
-COPY ./contracts ./contracts
+COPY nitro-contracts ./contracts
 RUN NITRO_BUILD_IGNORE_TIMESTAMPS=1 make build-replay-env
 
 FROM debian:bookworm-slim as machine-versions

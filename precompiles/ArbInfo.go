@@ -8,7 +8,7 @@ import (
 	"github.com/offchainlabs/nitro/util/arbmath"
 )
 
-// ArbInfo povides the ability to lookup basic info about accounts and contracts.
+// ArbInfo povides the ability to lookup basic info about accounts and nitro-contracts.
 type ArbInfo struct {
 	Address addr // 0x65
 }

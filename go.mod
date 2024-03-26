@@ -4,7 +4,7 @@ go 1.20
 
 replace github.com/VictoriaMetrics/fastcache => ./fastcache
 
-replace github.com/ethereum/go-ethereum => ./go-ethereum
+replace github.com/ethereum/go-ethereum => ./geth-nitro
 
 require (
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible

@@ -136,7 +136,7 @@ test-go-redis: test-go-deps
 test-gen-proofs: \
 	$(patsubst $(arbitrator_cases)/%.wat,contracts/test/prover/proofs/%.json, $(arbitrator_tests_wat)) \
 	$(patsubst $(arbitrator_cases)/rust/src/bin/%.rs,contracts/test/prover/proofs/rust-%.json, $(arbitrator_tests_rust)) \
-	contracts/test/prover/proofs/go.json
+	nitro-contracts
 
 wasm-ci-build: $(arbitrator_wasm_libs) $(arbitrator_test_wasms)
 	@printf $(done)
@@ -332,12 +332,12 @@ contracts/test/prover/proofs/%.json: $(arbitrator_cases)/%.wasm $(arbitrator_pro
 	go run solgen/gen.go
 	@touch $@
 
-.make/solidity: $(DEP_PREDICATE) contracts/src/*/*.sol .make/yarndeps $(ORDER_ONLY_PREDICATE) .make
+.make/solidity: $(DEP_PREDICATE) nitro-contracts .make/yarndeps $(ORDER_ONLY_PREDICATE) .make
 	yarn --cwd contracts build
 	yarn --cwd contracts build:forge:yul
 	@touch $@
 
-.make/yarndeps: $(DEP_PREDICATE) contracts/package.json contracts/yarn.lock $(ORDER_ONLY_PREDICATE) .make
+.make/yarndeps: $(DEP_PREDICATE) nitro-contracts nitro-contracts $(ORDER_ONLY_PREDICATE) .make
 	yarn --cwd contracts install
 	@touch $@
 

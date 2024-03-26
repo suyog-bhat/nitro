@@ -68,7 +68,7 @@ func main() {
 	}
 	root := filepath.Dir(filename)
 	parent := filepath.Dir(root)
-	filePaths, err := filepath.Glob(filepath.Join(parent, "contracts", "build", "contracts", "src", "*", "*", "*.json"))
+	filePaths, err := filepath.Glob(filepath.Join(parent, "nitro-contracts", "build", "nitro-contracts", "src", "*", "*", "*.json"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -105,7 +105,7 @@ func main() {
 		modInfo.addArtifact(artifact)
 	}
 
-	yulFilePaths, err := filepath.Glob(filepath.Join(parent, "contracts", "out", "yul", "*", "*.json"))
+	yulFilePaths, err := filepath.Glob(filepath.Join(parent, "nitro-contracts", "out", "yul", "*", "*.json"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -134,8 +134,8 @@ func main() {
 		})
 	}
 
-	// add upgrade executor module which is not compiled locally, but imported from 'nitro-contracts' depedencies
-	upgExecutorPath := filepath.Join(parent, "contracts", "node_modules", "@offchainlabs", "upgrade-executor", "build", "contracts", "src", "UpgradeExecutor.sol", "UpgradeExecutor.json")
+	// add upgrade executor module which is not compiled locally, but imported from 'nitro-nitro-contracts' depedencies
+	upgExecutorPath := filepath.Join(parent, "nitro-contracts", "node_modules", "@offchainlabs", "upgrade-executor", "build", "nitro-contracts", "src", "UpgradeExecutor.sol", "UpgradeExecutor.json")
 	_, err = os.Stat(upgExecutorPath)
 	if !os.IsNotExist(err) {
 		data, err := os.ReadFile(upgExecutorPath)

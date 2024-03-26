@@ -107,7 +107,7 @@ func TestDASRekey(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// Setup L1 chain and contracts
+	// Setup L1 chain and nitro-contracts
 	chainConfig := params.ArbitrumDevTestDASChainConfig()
 	l1info, l1client, _, l1stack := createTestL1BlockChain(t, nil)
 	defer requireClose(t, l1stack)
@@ -237,7 +237,7 @@ func TestDASComplexConfigAndRestMirror(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// Setup L1 chain and contracts
+	// Setup L1 chain and nitro-contracts
 	chainConfig := params.ArbitrumDevTestDASChainConfig()
 	l1info, l1client, _, l1stack := createTestL1BlockChain(t, nil)
 	defer requireClose(t, l1stack)

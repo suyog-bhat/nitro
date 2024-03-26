@@ -367,7 +367,7 @@ type AccessListOpts struct {
 	AfterDelayedMessagesRead int
 }
 
-// AccessList returns access list (contracts, storage slots) for batchposter.
+// AccessList returns access list (nitro-contracts, storage slots) for batchposter.
 func AccessList(opts *AccessListOpts) types.AccessList {
 	l := types.AccessList{
 		types.AccessTuple{
@@ -902,7 +902,7 @@ func (b *BatchPoster) estimateGas(ctx context.Context, sequencerMessage []byte, 
 		return gas + config.ExtraBatchGas, nil
 	}
 
-	// Here we set seqNum to MaxUint256, and prevMsgNum to 0, because it disables the smart contracts' consistency checks.
+	// Here we set seqNum to MaxUint256, and prevMsgNum to 0, because it disables the smart nitro-contracts' consistency checks.
 	// However, we set nextMsgNum to 1 because it is necessary for a correct estimation for the final to be non-zero.
 	// Because we're likely estimating against older state, this might not be the actual next message,
 	// but the gas used should be the same.
