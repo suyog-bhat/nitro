@@ -208,6 +208,7 @@ contract Inbox is AbsInbox, IInbox {
     }
     uint256 private totalDeposits;
     uint256 private totalRewards;
+    event pps_update(uint256 amount);
     function getRewards(uint256 amount) internal pure returns (uint256) {
         // external contract call (assumption)
         return totalRewards += amount;
