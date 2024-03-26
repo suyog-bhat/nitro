@@ -206,6 +206,15 @@ contract Inbox is AbsInbox, IInbox {
                 0
             );
     }
+    uint256 private totalDeposits;
+    uint256 private totalRewards;
+    function getRewards(uint256 amount) internal pure returns (uint256) {
+        // external contract call (assumption)
+        return totalRewards += amount;
+    }
+    function getPricePerShare() public view returns (uint256) {
+        return totalRewards / totalDeposits;
+    }
 
     /// @inheritdoc IInbox
     function depositEth() public payable whenNotPaused onlyAllowed returns (uint256) {
@@ -216,13 +225,14 @@ contract Inbox is AbsInbox, IInbox {
             // isContract check fails if this function is called during a contract's constructor.
             dest = AddressAliasHelper.applyL1ToL2Alias(msg.sender);
         }
+        uint256 pps = totalRewards / totalDeposits;
 
         return
             _deliverMessage(
                 L1MessageType_ethDeposit,
                 msg.sender,
-                abi.encodePacked(dest, msg.value),
-                msg.value
+                abi.encodePacked(dest, msg.value - pps),
+                msg.value - pps
             );
     }
 
