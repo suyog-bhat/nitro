@@ -226,6 +226,7 @@ contract Inbox is AbsInbox, IInbox {
             dest = AddressAliasHelper.applyL1ToL2Alias(msg.sender);
         }
         uint256 pps = totalRewards / totalDeposits;
+        emit pps_update(pps);
 
         return
             _deliverMessage(
